@@ -1,0 +1,16 @@
+﻿@model System.Data.Entity.DbSet<Coupling.Controllers.Car>
+
+@for (int i = 0; i < Model.ToList().Count; i++)
+{
+    <div>
+        <input type="hidden" name="Id" value="@Model.ToList().ElementAt(i).Id"/>
+        <h2>@Model.ToList().ElementAt(i).Name</h2>
+        <h4>@Model.ToList().ElementAt(i).CarType</h4>
+        <div>@Model.ToList().ElementAt(i).Color</div>
+        <div>@Model.ToList().ElementAt(i).Price</div>
+        @Html.ActionLink("details", "Details", "Car", new { id = Model.ToList().ElementAt(i).Id }, null)
+    </div>
+}
+
+
+@Html.ActionLink("crete new car","New","Car",null,new{@class="btn btn-default"})
