@@ -6,6 +6,8 @@ using System.Web.Mvc;
 
 namespace Coupling.Controllers
 {
+    using System.Web.ModelBinding;
+
     public class CarController : Controller
     {
        public ActionResult List()
