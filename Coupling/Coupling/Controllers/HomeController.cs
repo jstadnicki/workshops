@@ -6,28 +6,58 @@ using System.Web.Mvc;
 
 namespace Coupling.Controllers
 {
+    using System;
     using System.Web.ModelBinding;
+
+    using WebGrease.Css.Extensions;
 
     public class CarController : Controller
     {
-       public ActionResult List()
-        {
-            var db = new Unit();
-            var c = db.Cars;
+        private readonly ICarApplicationService _applicationService;
 
-            return View(c);
+        public CarController(ICarApplicationService applicationService)
+        {
+            _applicationService = applicationService;
+        }
+
+        public ActionResult List()
+        {
+            var viewModel = _applicationService.GetCarsViewModel();
+            return View(viewModel);
         }
 
         public ActionResult Details(int id)
         {
-            var c = new Unit().Cars.First(d => d.Id == id);
-            return View(c);
+            var viewModel = _applicationService.GetCarDetailsViewModel(id);
+            return View(viewModel);
         }
 
-        public ActionResult New()
+        public ActionResult CreateCar()
         {
-            var viewModel = new NewCarViewModel();
-            return View("CreateNewCarView",viewModel);
+            var viewModel = new CreateCarViewModel();
+            return View(viewModel);
+        }
+        
+        [HttpPost]
+        public ActionResult SaveCar(CreateCarViewModel viewmodel)
+        {
+            if (ModelState.IsValid == false)
+            {
+                return RedirectToAction("New");
+            }
+
+            var c = new Car
+            {
+                CarType = (CarType)viewmodel.SelectedCarType,
+                Color = viewmodel.Color,
+                Name = viewmodel.Name,
+                Price = viewmodel.Price
+            };
+
+            var data = new Unit();
+            data.Cars.Add(c);
+            data.SaveChanges();
+            return RedirectToAction("List");
         }
 
         public ActionResult Edit(int carId)
@@ -60,7 +90,7 @@ namespace Coupling.Controllers
             {
                 using (var d = new Unit())
                 {
-                    d.Cars.First(x => x.Id == c.Id).CarType = (CarType) newSelectedCarType;
+                    d.Cars.First(x => x.Id == c.Id).CarType = (CarType)newSelectedCarType;
                     d.Cars.First(x => x.Id == c.Id).Id = c.Id;
                     d.Cars.First(x => x.Id == c.Id).Color = c.Color;
                     d.Cars.First(x => x.Id == c.Id).Price = c.Price;
@@ -77,26 +107,6 @@ namespace Coupling.Controllers
             }
         }
 
-        public ActionResult SaveNewCar(NewCarViewModel viewmodel)
-        {
-            if (ModelState.IsValid == false)
-            {
-                return RedirectToAction("New");
-            }
-
-            var c =new Car
-            {
-                CarType = (CarType)viewmodel.SelectedCarType,
-                Color = viewmodel.Color,
-                Name = viewmodel.Name,
-                Price = viewmodel.Price
-            };
-
-            var data = new  Unit();
-            data.Cars.Add(c);
-            data.SaveChanges();
-            return RedirectToAction("List");
-        }
 
         public ActionResult Delete(int id)
         {
@@ -107,7 +117,7 @@ namespace Coupling.Controllers
         }
     }
 
-    public class NewCarViewModel
+    public class CreateCarViewModel
     {
         public string Color { get; set; }
         public string Name { get; set; }
@@ -115,31 +125,32 @@ namespace Coupling.Controllers
         public Dictionary<int, string> CarTypes { get; set; }
         public int SelectedCarType { get; set; }
 
-        public NewCarViewModel()
+        public CreateCarViewModel()
         {
             var x = new Dictionary<int, string>();
-            x[1] = "Fiat";
-            x[2] = "Form";
-            x[3] = "Volksvagen";
-            x[3] = "Mazda";
-            x[4] = "Luxus";
-            x[5] = "Kiya";
+            Enum.GetValues(typeof(CarType))
+                .Cast<CarType>()
+                .ForEach(a => x.Add((int)a, a.ToString()));
 
             CarTypes = x;
         }
 
     }
 
-    public class Unit : DbContext
+    public class Unit : DbContext,IUnit
     {
         public Unit()
             : base("DefaultConnection")
         {
 
         }
-        public DbSet<Car> Cars { get; set; }
+        public IDbSet<Car> Cars { get; set; }
     }
 
+    public interface IUnit
+    {
+        IDbSet<Car> Cars { get; set; }
+    }
 
     public class Car
     {
@@ -159,5 +170,91 @@ namespace Coupling.Controllers
         Luxus,
         [Display(Description = "Kia")]
         Kya
+    }
+
+    public class CarsViewModel
+    {
+        public CarsViewModel()
+        {
+            Cars = new List<CarViewModel>();
+        }
+
+        public List<CarViewModel> Cars { get; set; }
+    }
+
+    public class CarViewModel
+    {
+        public int Id { get; set; }
+        public string Color { get; set; }
+        public string Name { get; set; }
+        public string Price { get; set; }
+        public string CarType { get; set; }
+    }
+
+    public interface ICarApplicationService
+    {
+        CarsViewModel GetCarsViewModel();
+        CarDetailsViewModel GetCarDetailsViewModel(int id);
+    }
+
+    public class CarDetailsViewModel
+    {
+        public CarDetailsViewModel(string name, string price, string carType, string color, int id)
+        {
+            Name = name;
+            Price = price;
+            CarType = carType;
+            Color = color;
+            Id = id;
+        }
+
+        public string Name { get; set; }
+        public string Price { get; set; }
+        public string CarType { get; set; }
+        public string Color { get; set; }
+        public int Id { get; set; }
+    }
+
+    public class CarApplicationService : ICarApplicationService
+    {
+        private readonly IUnit _unit;
+
+        public CarApplicationService(IUnit unit)
+        {
+            _unit = unit;
+        }
+
+        public CarsViewModel GetCarsViewModel()
+        {
+            var carsFromUnit = _unit.Cars.ToList();
+
+            var viewModel = new CarsViewModel();
+
+            foreach (var car in carsFromUnit)
+            {
+                viewModel.Cars.Add(
+                    new CarViewModel
+                    {
+                        Id = car.Id,
+                        CarType = car.CarType.ToString(),
+                        Color = car.Color,
+                        Name = car.Name,
+                        Price = car.Price.ToString("C")
+                    });
+            }
+            return viewModel;
+        }
+
+        public CarDetailsViewModel GetCarDetailsViewModel(int id)
+        {
+            var car = _unit.Cars.Single(fcar => fcar.Id == id);
+            var carDetailsViewModel = new CarDetailsViewModel(
+                car.Name,
+                car.Price.ToString("C"),
+                car.CarType.ToString(),
+                car.Color,
+                car.Id);
+            return carDetailsViewModel;
+        }
     }
 }

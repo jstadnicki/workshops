@@ -1,0 +1,28 @@
+﻿@model Coupling.Controllers.CreateCarViewModel
+
+@using (Html.BeginForm("SaveNewCar", "Car", FormMethod.Post))
+{
+    <div>
+        @Html.LabelFor(m => m.Color)
+        @Html.TextBoxFor(m => m.Color)
+    </div>
+    <div>
+        @Html.LabelFor(m=>m.Name)
+        @Html.TextBoxFor(m=>m.Name)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Price)
+        @Html.TextBoxFor(m => m.Price)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.SelectedCarType)
+        @Html.DropDownListFor(m => m.SelectedCarType, Model.CarTypes.Select(ct => new SelectListItem
+        {
+            Text = ct.Value,
+            Value = ct.Key.ToString()
+        }));
+    </div>
+
+    <input type="submit" value="add car"/>
+}
