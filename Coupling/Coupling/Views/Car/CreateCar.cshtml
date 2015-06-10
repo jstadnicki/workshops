@@ -1,18 +1,21 @@
 ﻿@model Coupling.Controllers.CreateCarViewModel
 
-@using (Html.BeginForm("SaveNewCar", "Car", FormMethod.Post))
+@using (Html.BeginForm("CreateCar", "Car", FormMethod.Post))
 {
     <div>
-        @Html.LabelFor(m => m.Color)
-        @Html.TextBoxFor(m => m.Color)
+        @Html.LabelFor(m => m.CarDto.Color)
+        @Html.TextBoxFor(m => m.CarDto.Color)
+        @Html.ValidationMessageFor(m=>m.CarDto.Color)
     </div>
     <div>
-        @Html.LabelFor(m=>m.Name)
-        @Html.TextBoxFor(m=>m.Name)
+        @Html.LabelFor(m => m.CarDto.Name)
+        @Html.TextBoxFor(m => m.CarDto.Name)
+        @Html.ValidationMessageFor(m => m.CarDto.Name)
     </div>
     <div>
-        @Html.LabelFor(m => m.Price)
-        @Html.TextBoxFor(m => m.Price)
+        @Html.LabelFor(m => m.CarDto.Price)
+        @Html.TextBoxFor(m => m.CarDto.Price)
+        @Html.ValidationMessageFor(m => m.CarDto.Price)
     </div>
 
     <div>
@@ -24,5 +27,5 @@
         }));
     </div>
 
-    <input type="submit" value="add car"/>
+    <input type="submit" value="add car" />
 }
