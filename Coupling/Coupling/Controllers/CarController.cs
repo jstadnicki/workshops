@@ -38,14 +38,15 @@ namespace Coupling.Controllers
         }
         
         [HttpPost]
-        public ActionResult CreateCar(CarDto viewmodel)
+        public ActionResult CreateCar(CarDto dto)
         {
-            if (_applicationService.CanSave(viewmodel,ModelState))
+            if (_applicationService.CanSave(dto,ModelState))
             {
-                _applicationService.SaveNewCar(viewmodel);
+                _applicationService.SaveNewCar(dto);
                 return RedirectToAction("List");
             }
-            return View(viewmodel);
+            var viewModel = new CreateCarViewModel(dto);
+            return View(viewModel);
         }
 
         public ActionResult Edit(int carId)
@@ -120,6 +121,8 @@ namespace Coupling.Controllers
             }
         }
 
+        public int SelectedCarType { get; set; }
+
         public CreateCarViewModel()
         {
             var x = new Dictionary<int, string>();
@@ -131,6 +134,10 @@ namespace Coupling.Controllers
             _carDto = new CarDto();
         }
 
+        public CreateCarViewModel(CarDto dto):this()
+        {
+            _carDto = dto;
+        }
     }
 
     public class Unit : DbContext,IUnit
@@ -198,9 +205,9 @@ namespace Coupling.Controllers
     {
         CarsViewModel GetCarsViewModel();
         CarDetailsViewModel GetCarDetailsViewModel(int id);
-        void SaveNewCar(CreateCarViewModel viewmodel);
+        void SaveNewCar(CarDto dto);
 
-        bool CanSave(CreateCarViewModel viewmodel, ModelStateDictionary modelState);
+        bool CanSave(CarDto viewmodel, ModelStateDictionary modelState);
     }
 
     public class CarDetailsViewModel
@@ -251,21 +258,21 @@ namespace Coupling.Controllers
             return viewModel;
         }
 
-        public void SaveNewCar(CreateCarViewModel viewmodel)
+        public void SaveNewCar(CarDto dto)
         {
             var c = new Car
                         {
-                            CarType = (CarType)viewmodel.SelectedCarType,
-                            Color = viewmodel.CarDto.Color,
-                            Name = viewmodel.CarDto.Name,
-                            Price = viewmodel.CarDto.Price
+                            CarType = (CarType)dto.SelectedCarType,
+                            Color = dto.Color,
+                            Name = dto.Name,
+                            Price = dto.Price
                         };
             
             _unit.Cars.Add(c);
             _unit.Save();
         }
 
-        public bool CanSave(CreateCarViewModel viewmodel, ModelStateDictionary modelState)
+        public bool CanSave(CarDto viewmodel, ModelStateDictionary modelState)
         {
             return modelState.IsValid;
         }
