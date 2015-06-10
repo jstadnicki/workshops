@@ -36,19 +36,67 @@ namespace Coupling.Controllers
             var viewModel = _applicationService.GetCreateCarViewModel();
             return View(viewModel);
         }
-        
+
+
+
+
+
+
+
+
+
         [HttpPost]
         public ActionResult CreateCar(CarDto dto)
         {
-            if (_applicationService.CanSave(dto,ModelState))
+            return Do(
+                () => _applicationService.TrySaveNewCar(dto),
+                r => RedirectToAction("List"),
+                r =>
+                {
+                    var viewModel = _applicationService.GetCreateCarViewModel(dto);
+                    return View(viewModel);
+                });
+        }
+
+        private ActionResult Do<T>(
+            Func<T> command,
+            Func<T, ActionResult> onSuccess,
+            Func<T, ActionResult> onFail) 
+            where T : OperationResult, new()
+        {
+            if (false == ModelState.IsValid)
             {
-                _applicationService.SaveNewCar(dto);
-                return RedirectToAction("List");
+                return onFail(new T());
             }
 
-            var viewModel = _applicationService.GetCreateCarViewModel(dto);
-            return View(viewModel);
+            var result = command();
+
+            if (!result.IsValid)
+            {
+                UpdateModelStateErrors(result.Errors);
+                return onFail(result);
+            }
+
+            return onSuccess(result);
         }
+
+        private void UpdateModelStateErrors(List<KeyValuePair<string, string>> result)
+        {
+            result.ForEach(x=>ModelState.AddModelError(x.Key,x.Value));
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public ActionResult Edit(int carId)
         {
@@ -112,7 +160,7 @@ namespace Coupling.Controllers
         private readonly CarDto _carDto;
 
         public Dictionary<int, string> CarTypes { get; set; }
-        
+
 
         public CarDto CarDto
         {
@@ -135,13 +183,14 @@ namespace Coupling.Controllers
             _carDto = new CarDto();
         }
 
-        public CreateCarViewModel(CarDto dto):this()
+        public CreateCarViewModel(CarDto dto)
+            : this()
         {
             _carDto = dto;
         }
     }
 
-    public class Unit : DbContext,IUnit
+    public class Unit : DbContext, IUnit
     {
         public Unit()
             : base("DefaultConnection")
@@ -206,12 +255,10 @@ namespace Coupling.Controllers
     {
         CarsViewModel GetCarsViewModel();
         CarDetailsViewModel GetCarDetailsViewModel(int id);
-        void SaveNewCar(CarDto dto);
 
-        bool CanSave(CarDto viewmodel, ModelStateDictionary modelState);
-        
         CreateCarViewModel GetCreateCarViewModel();
         CreateCarViewModel GetCreateCarViewModel(CarDto dto);
+        OperationResult TrySaveNewCar(CarDto dto);
     }
 
     public class CarDetailsViewModel
@@ -271,7 +318,7 @@ namespace Coupling.Controllers
                             Name = dto.Name,
                             Price = dto.Price
                         };
-            
+
             _unit.Cars.Add(c);
             _unit.Save();
         }
@@ -291,6 +338,14 @@ namespace Coupling.Controllers
             return new CreateCarViewModel(dto);
         }
 
+        public OperationResult TrySaveNewCar(CarDto dto)
+        {
+            if (CanSave(dto))
+            {
+                SaveNewCar(dto);
+            }
+        }
+
         public CarDetailsViewModel GetCarDetailsViewModel(int id)
         {
             var car = _unit.Cars.Single(fcar => fcar.Id == id);
@@ -302,5 +357,15 @@ namespace Coupling.Controllers
                 car.Id);
             return carDetailsViewModel;
         }
+    }
+
+    public class OperationResult
+    {
+        public OperationResult()
+        {
+            Errors = new List<KeyValuePair<string, string>>();
+        }
+        public bool IsValid { get; set; }
+        public List<KeyValuePair<string,string>> Errors { get; set; }
     }
 }
