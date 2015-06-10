@@ -33,7 +33,7 @@ namespace Coupling.Controllers
 
         public ActionResult CreateCar()
         {
-            var viewModel = new CreateCarViewModel();
+            var viewModel = _applicationService.GetCreateCarViewModel();
             return View(viewModel);
         }
         
@@ -45,7 +45,8 @@ namespace Coupling.Controllers
                 _applicationService.SaveNewCar(dto);
                 return RedirectToAction("List");
             }
-            var viewModel = new CreateCarViewModel(dto);
+
+            var viewModel = _applicationService.GetCreateCarViewModel(dto);
             return View(viewModel);
         }
 
@@ -208,6 +209,9 @@ namespace Coupling.Controllers
         void SaveNewCar(CarDto dto);
 
         bool CanSave(CarDto viewmodel, ModelStateDictionary modelState);
+        
+        CreateCarViewModel GetCreateCarViewModel();
+        CreateCarViewModel GetCreateCarViewModel(CarDto dto);
     }
 
     public class CarDetailsViewModel
@@ -275,6 +279,16 @@ namespace Coupling.Controllers
         public bool CanSave(CarDto viewmodel, ModelStateDictionary modelState)
         {
             return modelState.IsValid;
+        }
+
+        public CreateCarViewModel GetCreateCarViewModel()
+        {
+            return new CreateCarViewModel();
+        }
+
+        public CreateCarViewModel GetCreateCarViewModel(CarDto dto)
+        {
+            return new CreateCarViewModel(dto);
         }
 
         public CarDetailsViewModel GetCarDetailsViewModel(int id)
