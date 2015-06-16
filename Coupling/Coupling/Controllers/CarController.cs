@@ -78,28 +78,10 @@ namespace Coupling.Controllers
             result.ForEach(x => ModelState.AddModelError(x.Key, x.Value));
         }
 
-        public ActionResult Edit(int carId)
+        public ActionResult EditCar(int carId)
         {
-            var db = new Unit();
-            var carToEdit = db.Cars.FirstOrDefault(r => r.Id == carId);
-            if (carToEdit == null)
-            {
-                return new HttpNotFoundResult("nie ma samochodu z takim id");
-            }
-
-            var x = new Dictionary<int, string>();
-            x[1] = "Fiat";
-            x[2] = "Form";
-            x[3] = "Volksvagen";
-            x[3] = "Mazda";
-            x[4] = "Luxus";
-            x[5] = "Kiya";
-
-
-
-            ViewData["ctypes"] = x;
-            return View("UpdateCarView", carToEdit);
-
+            var viewModel = _applicationService.GetEditCarViewModel(carId);
+            return View(viewModel);
         }
 
         public ActionResult UpdateCarData(Car c, int newSelectedCarType)
@@ -239,6 +221,26 @@ namespace Coupling.Controllers
         CreateCarViewModel GetCreateCarViewModel();
         CreateCarViewModel GetCreateCarViewModel(CarDto dto);
         OperationResult TrySaveNewCar(CarDto dto);
+
+        EditCarViewModel GetEditCarViewModel(int carId);
+    }
+
+    public class EditCarViewModel
+    {
+        public EditCarViewModel(Car carToEdit)
+        {
+            Name = carToEdit.Name;
+            Price = carToEdit.Price;
+            CarType = carToEdit.CarType;
+            Color = carToEdit.Color;
+            Id = carToEdit.Id;
+        }
+
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public CarType CarType { get; set; }
+        public string Color { get; set; }
+        public int Id { get; set; }
     }
 
     public class CarDetailsViewModel
@@ -326,6 +328,20 @@ namespace Coupling.Controllers
                 SaveNewCar(dto);
             }
             return new OperationResult(true);
+        }
+
+        public EditCarViewModel GetEditCarViewModel(int carId)
+        {
+            var carToEdit = _unit.Cars.Single(r => r.Id == carId);
+            var viewmodel = new EditCarViewModel(carToEdit);
+            return viewmodel;
+        }
+
+        private static Dictionary<int, string> GetCarTypes()
+        {
+            var x = new Dictionary<int, string>();
+            Enum.GetValues(typeof(CarType)).Cast<CarType>().ForEach(a => x.Add((int)a, a.ToString()));
+            return x;
         }
 
         public CarDetailsViewModel GetCarDetailsViewModel(int id)

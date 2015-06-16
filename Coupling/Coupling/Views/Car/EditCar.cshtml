@@ -1,0 +1,25 @@
+﻿@using System.Web.Mvc.Html
+@model Coupling.Controllers.EditCarViewModel
+@using (Html.BeginForm("UpdateCarData", "Car", FormMethod.Post))
+{
+    @Html.HiddenFor(m=>m.Id)
+    <div>
+        @Html.LabelFor(m => m.Color)
+        @Html.TextBoxFor(m => m.Color)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Price)
+        @Html.TextBoxFor(m => m.Price)
+    </div>
+
+    <div>
+        @Html.Label("Car type:")
+        @Html.EnumDropDownListFor(m=>m.CarType)
+    </div>
+
+    <input type="submit" value="save" />
+}
