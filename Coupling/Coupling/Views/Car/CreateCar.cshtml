@@ -2,10 +2,11 @@
 
 @using (Html.BeginForm("CreateCar", "Car", FormMethod.Post))
 {
+    @Html.ValidationSummary()
     <div>
         @Html.LabelFor(m => m.CarDto.Color)
         @Html.TextBoxFor(m => m.CarDto.Color)
-        @Html.ValidationMessageFor(m=>m.CarDto.Color)
+        @Html.ValidationMessageFor(m => m.CarDto.Color)
     </div>
     <div>
         @Html.LabelFor(m => m.CarDto.Name)
@@ -19,12 +20,12 @@
     </div>
 
     <div>
-        @Html.LabelFor(m => m.SelectedCarType)
-        @Html.DropDownListFor(m => m.SelectedCarType, Model.CarTypes.Select(ct => new SelectListItem
+        @Html.LabelFor(m => m.CarDto.SelectedCarType)
+        @Html.DropDownListFor(m => m.CarDto.SelectedCarType, Model.CarTypes.Select(ct => new SelectListItem
         {
             Text = ct.Value,
             Value = ct.Key.ToString()
-        }));
+        }))
     </div>
 
     <input type="submit" value="add car" />

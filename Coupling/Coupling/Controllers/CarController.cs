@@ -7,6 +7,7 @@ using System.Web.Mvc;
 namespace Coupling.Controllers
 {
     using System;
+    using System.Web.UI.WebControls;
 
     using WebGrease.Css.Extensions;
 
@@ -37,23 +38,15 @@ namespace Coupling.Controllers
             return View(viewModel);
         }
 
-
-
-
-
-
-
-
-
         [HttpPost]
-        public ActionResult CreateCar(CarDto dto)
+        public ActionResult CreateCar(CarDto cardto)
         {
             return Do(
-                () => _applicationService.TrySaveNewCar(dto),
+                () => _applicationService.TrySaveNewCar(cardto),
                 r => RedirectToAction("List"),
                 r =>
                 {
-                    var viewModel = _applicationService.GetCreateCarViewModel(dto);
+                    var viewModel = _applicationService.GetCreateCarViewModel(cardto);
                     return View(viewModel);
                 });
         }
@@ -61,7 +54,7 @@ namespace Coupling.Controllers
         private ActionResult Do<T>(
             Func<T> command,
             Func<T, ActionResult> onSuccess,
-            Func<T, ActionResult> onFail) 
+            Func<T, ActionResult> onFail)
             where T : OperationResult, new()
         {
             if (false == ModelState.IsValid)
@@ -82,21 +75,8 @@ namespace Coupling.Controllers
 
         private void UpdateModelStateErrors(List<KeyValuePair<string, string>> result)
         {
-            result.ForEach(x=>ModelState.AddModelError(x.Key,x.Value));
+            result.ForEach(x => ModelState.AddModelError(x.Key, x.Value));
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         public ActionResult Edit(int carId)
         {
@@ -306,6 +286,7 @@ namespace Coupling.Controllers
                         Price = car.Price.ToString("C")
                     });
             }
+
             return viewModel;
         }
 
@@ -323,9 +304,9 @@ namespace Coupling.Controllers
             _unit.Save();
         }
 
-        public bool CanSave(CarDto viewmodel, ModelStateDictionary modelState)
+        public bool CanSave(CarDto viewmodel)
         {
-            return modelState.IsValid;
+            return true;
         }
 
         public CreateCarViewModel GetCreateCarViewModel()
@@ -344,6 +325,7 @@ namespace Coupling.Controllers
             {
                 SaveNewCar(dto);
             }
+            return new OperationResult(true);
         }
 
         public CarDetailsViewModel GetCarDetailsViewModel(int id)
@@ -362,10 +344,17 @@ namespace Coupling.Controllers
     public class OperationResult
     {
         public OperationResult()
+            : this(false)
+        {
+        }
+
+        public OperationResult(bool isValid)
         {
             Errors = new List<KeyValuePair<string, string>>();
+            IsValid = isValid;
         }
+
         public bool IsValid { get; set; }
-        public List<KeyValuePair<string,string>> Errors { get; set; }
+        public List<KeyValuePair<string, string>> Errors { get; set; }
     }
 }

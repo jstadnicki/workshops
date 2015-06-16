@@ -7,6 +7,7 @@ namespace Coupling.Controllers
         public CarDto()
         {
         }
+
         public int SelectedCarType { get; set; }
 
         [Required]
