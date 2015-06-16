@@ -5,6 +5,6 @@
     <div>@Model.Price</div>
     <div>@Model.CarType</div>
     <div>@Model.Color</div>
-    @Html.ActionLink("edit", "EditCar", "Car", new { carId = Model.Id }, new { @class = "btn btn-default" })
+    @Html.ActionLink("edit", "Edit", "Car", new { carId = Model.Id }, new { @class = "btn btn-default" })
     @Html.ActionLink("delete", "Delete", "Car", new { id = Model.Id }, new { @class = "btn btn-danger" })
 </div>

@@ -8,7 +8,7 @@ namespace Coupling.Controllers
         {
         }
 
-        public int SelectedCarType { get; set; }
+        public CarType SelectedCarType { get; set; }
 
         [Required]
         public string Color { get; set; }
@@ -16,7 +16,7 @@ namespace Coupling.Controllers
         [Required]
         public string Name { get; set; }
 
-        [Range(typeof(decimal),"1","1000000000")]
+        [Range(typeof(decimal), "1", "1000000000")]
         public decimal Price { get; set; }
     }
 }

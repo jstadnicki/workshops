@@ -189,9 +189,9 @@
     <Content Include="Views\Car\Index.cshtml" />
     <Content Include="Views\Car\List.cshtml" />
     <Content Include="Views\Car\Details.cshtml" />
-    <Content Include="Views\Car\EditCar.cshtml" />
+    <Content Include="Views\Car\Edit.cshtml" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
-    <Content Include="Views\Car\CreateCar.cshtml">
+    <Content Include="Views\Car\Create.cshtml">
       <SubType>Code</SubType>
     </Content>
   </ItemGroup>

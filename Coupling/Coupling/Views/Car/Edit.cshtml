@@ -1,0 +1,27 @@
+﻿@using System.Web.Mvc.Html
+@model Coupling.Controllers.EditCarViewModel
+@using (Html.BeginForm("Edit", "Car", FormMethod.Post))
+{
+    @Html.ValidationSummary()
+    
+    @Html.HiddenFor(m=>m.EditCarDto.Id)
+    <div>
+        @Html.LabelFor(m => m.EditCarDto.Color)
+        @Html.TextBoxFor(m => m.EditCarDto.Color)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.EditCarDto.Name)
+        @Html.TextBoxFor(m => m.EditCarDto.Name)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.EditCarDto.Price)
+        @Html.TextBoxFor(m => m.EditCarDto.Price)
+    </div>
+
+    <div>
+        @Html.Label("Car type:")
+        @Html.EnumDropDownListFor(m=>m.EditCarDto.CarType)
+    </div>
+
+    <input type="submit" value="save" />
+}

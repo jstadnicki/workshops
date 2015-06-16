@@ -7,9 +7,6 @@ using System.Web.Mvc;
 namespace Coupling.Controllers
 {
     using System;
-    using System.Web.UI.WebControls;
-
-    using WebGrease.Css.Extensions;
 
     public class CarController : Controller
     {
@@ -32,14 +29,14 @@ namespace Coupling.Controllers
             return View(viewModel);
         }
 
-        public ActionResult CreateCar()
+        public ActionResult Create()
         {
             var viewModel = _applicationService.GetCreateCarViewModel();
             return View(viewModel);
         }
 
         [HttpPost]
-        public ActionResult CreateCar(CarDto cardto)
+        public ActionResult Create(CarDto cardto)
         {
             return Do(
                 () => _applicationService.TrySaveNewCar(cardto),
@@ -78,33 +75,23 @@ namespace Coupling.Controllers
             result.ForEach(x => ModelState.AddModelError(x.Key, x.Value));
         }
 
-        public ActionResult EditCar(int carId)
+        public ActionResult Edit(int carId)
         {
             var viewModel = _applicationService.GetEditCarViewModel(carId);
             return View(viewModel);
         }
 
-        public ActionResult UpdateCarData(Car c, int newSelectedCarType)
+        [HttpPost]
+        public ActionResult Edit(EditCarDto EditCarDto)
         {
-            if (ModelState.IsValid)
-            {
-                using (var d = new Unit())
+            return Do(
+                () => _applicationService.TryEditCar(EditCarDto),
+                x => RedirectToAction("Details", new { id = EditCarDto.Id }),
+                x =>
                 {
-                    d.Cars.First(x => x.Id == c.Id).CarType = (CarType)newSelectedCarType;
-                    d.Cars.First(x => x.Id == c.Id).Id = c.Id;
-                    d.Cars.First(x => x.Id == c.Id).Color = c.Color;
-                    d.Cars.First(x => x.Id == c.Id).Price = c.Price;
-                    d.Cars.First(x => x.Id == c.Id).Name = c.Name;
-
-                    d.SaveChanges();
-
-                    return RedirectToAction("List");
-                }
-            }
-            else
-            {
-                return RedirectToAction("Edit", "Car", new { carId = c.Id });
-            }
+                    var viewModel = _applicationService.GetEditCarViewModel(EditCarDto);
+                    return View(viewModel);
+                });
         }
 
 
@@ -119,36 +106,17 @@ namespace Coupling.Controllers
 
     public class CreateCarViewModel
     {
-        private readonly CarDto _carDto;
-
-        public Dictionary<int, string> CarTypes { get; set; }
-
-
-        public CarDto CarDto
-        {
-            get
-            {
-                return _carDto;
-            }
-        }
-
-        public int SelectedCarType { get; set; }
+        public CarDto CarDto { get; private set; }
 
         public CreateCarViewModel()
         {
-            var x = new Dictionary<int, string>();
-            Enum.GetValues(typeof(CarType))
-                .Cast<CarType>()
-                .ForEach(a => x.Add((int)a, a.ToString()));
-
-            CarTypes = x;
-            _carDto = new CarDto();
+            CarDto = new CarDto();
         }
 
         public CreateCarViewModel(CarDto dto)
             : this()
         {
-            _carDto = dto;
+            CarDto = dto;
         }
     }
 
@@ -220,27 +188,58 @@ namespace Coupling.Controllers
 
         CreateCarViewModel GetCreateCarViewModel();
         CreateCarViewModel GetCreateCarViewModel(CarDto dto);
+
         OperationResult TrySaveNewCar(CarDto dto);
 
         EditCarViewModel GetEditCarViewModel(int carId);
+        EditCarViewModel GetEditCarViewModel(EditCarDto carDto);
+
+        OperationResult TryEditCar(EditCarDto cardto);
+
+    }
+
+    public class EditCarDto
+    {
+        public EditCarDto()
+        {}
+
+        public EditCarDto(int id, string name, decimal price, CarType carType, string color)
+        {
+            Id = id;
+            Name = name;
+            Price = price;
+            CarType = carType;
+            Color = color;
+        }
+
+        [Required]
+        public int Id { get; set; }
+        
+        [Required]
+        public string Name { get; set; }
+       
+        [Range(typeof(decimal), "1", "1000000000")]
+        public decimal Price { get; set; }
+        
+        public CarType CarType { get; set; }
+       
+        [Required]
+        public string Color { get; set; }
     }
 
     public class EditCarViewModel
     {
         public EditCarViewModel(Car carToEdit)
         {
-            Name = carToEdit.Name;
-            Price = carToEdit.Price;
-            CarType = carToEdit.CarType;
-            Color = carToEdit.Color;
-            Id = carToEdit.Id;
+            EditCarDto = new EditCarDto(carToEdit.Id, carToEdit.Name, carToEdit.Price, carToEdit.CarType, carToEdit.Color);
         }
 
-        public string Name { get; set; }
-        public decimal Price { get; set; }
-        public CarType CarType { get; set; }
-        public string Color { get; set; }
-        public int Id { get; set; }
+        public EditCarViewModel(EditCarDto carToEdit)
+        {
+            EditCarDto = carToEdit;
+        }
+
+        public EditCarDto EditCarDto { get; set; }
     }
 
     public class CarDetailsViewModel
@@ -337,11 +336,33 @@ namespace Coupling.Controllers
             return viewmodel;
         }
 
-        private static Dictionary<int, string> GetCarTypes()
+        public EditCarViewModel GetEditCarViewModel(EditCarDto carDto)
         {
-            var x = new Dictionary<int, string>();
-            Enum.GetValues(typeof(CarType)).Cast<CarType>().ForEach(a => x.Add((int)a, a.ToString()));
-            return x;
+            return new EditCarViewModel(carDto);
+        }
+
+        public OperationResult TryEditCar(EditCarDto cardto)
+        {
+            if (CanSave(cardto))
+            {
+                var dbCar = _unit.Cars.First(x => x.Id == cardto.Id);
+                dbCar.CarType = cardto.CarType;
+                dbCar.Id = cardto.Id;
+                dbCar.Color = cardto.Color;
+                dbCar.Price = cardto.Price;
+                dbCar.Name = cardto.Name;
+
+                _unit.Save();
+
+                return new OperationResult(true);
+            }
+
+            return new OperationResult(false);
+        }
+
+        private bool CanSave(EditCarDto dto)
+        {
+            return true;
         }
 
         public CarDetailsViewModel GetCarDetailsViewModel(int id)

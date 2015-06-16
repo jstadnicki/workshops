@@ -1,6 +1,6 @@
 ﻿@model Coupling.Controllers.CreateCarViewModel
 
-@using (Html.BeginForm("CreateCar", "Car", FormMethod.Post))
+@using (Html.BeginForm("Create", "Car", FormMethod.Post))
 {
     @Html.ValidationSummary()
     <div>
@@ -21,11 +21,7 @@
 
     <div>
         @Html.LabelFor(m => m.CarDto.SelectedCarType)
-        @Html.DropDownListFor(m => m.CarDto.SelectedCarType, Model.CarTypes.Select(ct => new SelectListItem
-        {
-            Text = ct.Value,
-            Value = ct.Key.ToString()
-        }))
+        @Html.EnumDropDownListFor(m => m.CarDto.SelectedCarType)
     </div>
 
     <input type="submit" value="add car" />
