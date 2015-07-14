@@ -2,6 +2,8 @@ namespace Coupling.Controllers
 {
     using System.ComponentModel.DataAnnotations;
 
+    using Coupling.Common;
+
     public class CarDto
     {
         public CarDto()

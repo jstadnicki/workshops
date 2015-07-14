@@ -5,6 +5,7 @@ using Microsoft.Practices.Unity.Configuration;
 namespace Coupling.App_Start
 {
     using Coupling.Controllers;
+    using Coupling.Interfaces;
 
     /// <summary>
     /// Specifies the Unity configuration for the main container.

@@ -1,0 +1,33 @@
+Aplikacja ma pomóc mi (szefowie) w prowadzeniu mojego małego biznesu, 
+który polega na braniu w wynajmen garaży od właścicieli, 
+a następnie dalszemu podnajmownaiu ich klientom indywidualnym. 
+Garaże są różnego rozmiaru, czasem na jednym uda się zaparkować kilka samochodów, kilkanaście, a czasem ponad setkę.
+
+Jako szef mogę dodawać nowych wlascicieli garazy
+Jako szef moge dodawac nowe garaze do istniejacych wlascicieli
+Jako szef moge usuwac garaz z istniejących włascicieli
+Jako szefo mogę usunąć właściciela
+Jako szef mogę zmienić właściciela garażu
+
+Jako szef moge dodawac samochody do istniejacych garazy
+Jako szef moge usuwac samochody z garazy
+jako szef moge usuwac samochody
+
+Jako szef chce wiedzieć kto jest właścicielem garażu i jak mogę się z taką osobą skontaktować.
+Jako szef chce wiedzieć, kto jest włascicielem samochodu i jak mogę się taką osobą (osobami) skontaktować
+Jako szef chce mieć możliwość wysłania automatycznej wiadomości to właściciela samochodu, aby np. przypomnieć o upływie czasu wynajmu, lub przypomnieniu i zapłacie za kolejny okres.
+
+Jako szef mogę sprawdzić, czy w garażu jest jeszcze miejsce na samochód i do kiedy ma wykupiony parking.
+
+Parkowanie małego samochodu kosztuje mniej (motor, osobowy, dostawczy, tir)
+Wynajęcie garażu na dłuższy okres do parkowania samochodu jest tańsze.
+
+Oddanie większego garażu na na dzierżawę i parking kosztuje mniej per sztukę, niż oddanie małego garażu - tak negocjuję wszystkie swoje umowy, jako szef chce wiedzieć ile mnie kosztuje wynajem garażu i ile na tym zarabiam
+Oddanie garażu na dłużej pod najem jest tańsze per miesiąc, niż krótkie terminy dzierżawy - tak negocjuje swoje umowy, jako szef chce wiedzieć ile zarabiam, lub tracę na takich najmach
+
+Jako szef chce wiedzieć, jakie terminy/czasy najmu dla mnie są najbardziej opłacalne
+Jako szef chce wiedzieć, jakie miejsca najmy są dla mnie najbardzie opłacalne
+
+Chciałbym, aby właściciel samochodu mógł wejsc na stronę i zobaczyć do kiedy ma wykupione miejsce
+Chciałbym aby przyszły klient mógł wejsc na stronę i sprawdzić czy są wolne miejsca
+Chciałbym aby przyszły klient mogł wejsc na stronę i zamowic sobie miejsce, tak abym mógl wcześniej wiedzieć, czy są chetni na miejsce postojowe

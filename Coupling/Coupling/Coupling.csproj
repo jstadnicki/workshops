@@ -142,8 +142,23 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="Controllers\GarageOwnerController.cs" />
+    <Compile Include="DataModels\Car.cs" />
+    <Compile Include="Interfaces\ICarApplicationService.cs" />
+    <Compile Include="Services\CarApplicationService.cs" />
     <Compile Include="Controllers\CarController.cs" />
-    <Compile Include="Controllers\CarDto.cs" />
+    <Compile Include="ViewModels\CarDetailsViewModel.cs" />
+    <Compile Include="Dtos\CarDto.cs" />
+    <Compile Include="ViewModels\CarsViewModel.cs" />
+    <Compile Include="Common\CarType.cs" />
+    <Compile Include="ViewModels\CarViewModel.cs" />
+    <Compile Include="ViewModels\CreateCarViewModel.cs" />
+    <Compile Include="Dtos\EditCarDto.cs" />
+    <Compile Include="ViewModels\EditCarViewModel.cs" />
+    <Compile Include="Controllers\IUnit.cs" />
+    <Compile Include="Infrastructure\OperationResult.cs" />
+    <Compile Include="Repository\Unit.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -197,7 +212,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
