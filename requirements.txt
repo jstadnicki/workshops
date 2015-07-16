@@ -1,23 +1,22 @@
 Aplikacja ma pomóc mi (szefowie) w prowadzeniu mojego małego biznesu, 
-który polega na braniu w wynajmen garaży od właścicieli, 
+który polega na braniu w dzierżawę garaży od właścicieli, 
 a następnie dalszemu podnajmownaiu ich klientom indywidualnym. 
 Garaże są różnego rozmiaru, czasem na jednym uda się zaparkować kilka samochodów, kilkanaście, a czasem ponad setkę.
-
 Jako szef mogę dodawać nowych wlascicieli garazy
 Jako szef moge dodawac nowe garaze do istniejacych wlascicieli
 Jako szef moge usuwac garaz z istniejących włascicieli
-Jako szefo mogę usunąć właściciela
+Jako szef mogę usunąć właściciela
 Jako szef mogę zmienić właściciela garażu
 
-Jako szef moge dodawac samochody do istniejacych garazy
-Jako szef moge usuwac samochody z garazy
-jako szef moge usuwac samochody
+Jako szef moge dodawać samochody do istniejacych garazy
+Jako szef moge usuwać samochody z garaży
+Jako szef moge usuwać samochody
 
 Jako szef chce wiedzieć kto jest właścicielem garażu i jak mogę się z taką osobą skontaktować.
 Jako szef chce wiedzieć, kto jest włascicielem samochodu i jak mogę się taką osobą (osobami) skontaktować
-Jako szef chce mieć możliwość wysłania automatycznej wiadomości to właściciela samochodu, aby np. przypomnieć o upływie czasu wynajmu, lub przypomnieniu i zapłacie za kolejny okres.
+Jako szef chce mieć możliwość wysłania automatycznej wiadomości do właściciela samochodu, aby np. przypomnieć o upływie czasu wynajmu, lub przypomnieniu i zapłacie za kolejny okres.
 
-Jako szef mogę sprawdzić, czy w garażu jest jeszcze miejsce na samochód i do kiedy ma wykupiony parking.
+* Jako szef mogę sprawdzić, czy w garażu jest jeszcze miejsce na samochód i do kiedy ma wykupiony parking.
 
 Parkowanie małego samochodu kosztuje mniej (motor, osobowy, dostawczy, tir)
 Wynajęcie garażu na dłuższy okres do parkowania samochodu jest tańsze.
