@@ -142,6 +142,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Areas\Boss\BossAreaRegistration.cs" />
+    <Compile Include="Areas\Boss\Controllers\AddGarageModel.cs" />
+    <Compile Include="Areas\Boss\Controllers\GarageListController.cs" />
+    <Compile Include="Areas\Boss\Controllers\GarageRemoveController.cs" />
+    <Compile Include="Areas\Boss\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Boss\Controllers\IGarageAddService.cs" />
+    <Compile Include="Areas\Client\ClientAreaRegistration.cs" />
+    <Compile Include="Areas\Boss\Controllers\GarageAddController.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\GarageOwnerController.cs" />
     <Compile Include="DataModels\Car.cs" />
@@ -180,6 +188,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Areas\Boss\Views\web.config" />
+    <Content Include="Areas\Client\Views\web.config" />
+    <None Include="Areas\Boss\Views\GarageAdd\Index.cshtml" />
+    <None Include="Areas\Boss\Views\GarageList\Index.cshtml" />
+    <None Include="Areas\Boss\Views\GarageRemove\Index.cshtml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Icon.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -212,6 +225,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Boss\Models\" />
+    <Folder Include="Areas\Boss\Views\Shared\" />
+    <Folder Include="Areas\Client\Controllers\" />
+    <Folder Include="Areas\Client\Models\" />
+    <Folder Include="Areas\Client\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
