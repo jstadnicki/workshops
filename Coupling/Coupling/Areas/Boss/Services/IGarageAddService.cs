@@ -1,9 +1,9 @@
-namespace Coupling.Areas.Boss.Controllers
+using System.Web.Mvc;
+using Coupling.Areas.Boss.Controllers;
+using Coupling.Controllers;
+
+namespace Coupling.Areas.Boss.Services
 {
-    using System.Web.Mvc;
-
-    using Coupling.Controllers;
-
     public interface IGarageAddService
     {
         ActionResult GetCreateGarageViewModel();

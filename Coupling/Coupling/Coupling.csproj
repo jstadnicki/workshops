@@ -21,6 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -143,13 +144,20 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Boss\BossAreaRegistration.cs" />
-    <Compile Include="Areas\Boss\Controllers\AddGarageModel.cs" />
-    <Compile Include="Areas\Boss\Controllers\GarageListController.cs" />
-    <Compile Include="Areas\Boss\Controllers\GarageRemoveController.cs" />
-    <Compile Include="Areas\Boss\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Boss\Controllers\IGarageAddService.cs" />
+    <Compile Include="Areas\Boss\Models\AddGarageModel.cs" />
+    <Compile Include="Areas\Boss\Services\Implementation\GarageService.cs" />
+    <Compile Include="Areas\Boss\Services\IGarageListService.cs" />
+    <Compile Include="Areas\Boss\Services\IGarageRemoveService.cs" />
+    <Compile Include="Areas\Boss\Models\CreateGarageViewModel.cs" />
+    <Compile Include="Areas\Boss\Models\GarageListViewModel.cs" />
+    <Compile Include="Areas\Boss\Models\GarageRemoveViewModel.cs" />
+    <Compile Include="Areas\Boss\Services\_IGarageService.cs" />
+    <Compile Include="Areas\Boss\Controllers\GarageController\_GarageController.cs" />
+    <Compile Include="Areas\Boss\Controllers\GarageController\List.cs" />
+    <Compile Include="Areas\Boss\Controllers\GarageController\Remove.cs" />
+    <Compile Include="Areas\Boss\Services\IGarageAddService.cs" />
     <Compile Include="Areas\Client\ClientAreaRegistration.cs" />
-    <Compile Include="Areas\Boss\Controllers\GarageAddController.cs" />
+    <Compile Include="Areas\Boss\Controllers\GarageController\Add.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\GarageOwnerController.cs" />
     <Compile Include="DataModels\Car.cs" />
@@ -190,9 +198,9 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Areas\Boss\Views\web.config" />
     <Content Include="Areas\Client\Views\web.config" />
-    <None Include="Areas\Boss\Views\GarageAdd\Index.cshtml" />
-    <None Include="Areas\Boss\Views\GarageList\Index.cshtml" />
-    <None Include="Areas\Boss\Views\GarageRemove\Index.cshtml" />
+    <Content Include="Areas\Boss\Views\Garage\List.cshtml" />
+    <Content Include="Areas\Boss\Views\Garage\Remove.cshtml" />
+    <None Include="Areas\Boss\Views\Garage\Add.cshtml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Icon.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -225,7 +233,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Boss\Models\" />
     <Folder Include="Areas\Boss\Views\Shared\" />
     <Folder Include="Areas\Client\Controllers\" />
     <Folder Include="Areas\Client\Models\" />
