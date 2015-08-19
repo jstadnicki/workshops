@@ -1,5 +1,7 @@
 ﻿namespace Coupling.Controllers
 {
+    using Coupling.Areas.Boss.Dtos;
+
     public class CreateCarViewModel
     {
         public CarDto CarDto { get; private set; }

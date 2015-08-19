@@ -3,6 +3,8 @@
 namespace Coupling.Controllers
 {
     using System;
+
+    using Coupling.Areas.Boss.Dtos;
     using Coupling.Interfaces;
 
     public class CarBaseController : BaseController

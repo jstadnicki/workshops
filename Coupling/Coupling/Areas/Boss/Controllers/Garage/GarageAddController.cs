@@ -3,7 +3,9 @@
     using System.Web.Mvc;
 
     using Coupling.Areas.Boss.Models;
+    using Coupling.Areas.Boss.Models.Garage;
     using Coupling.Areas.Boss.Services;
+    using Coupling.Areas.Boss.Services.Garage;
     using Coupling.Controllers;
 
     [RouteArea("boss")]
@@ -27,7 +29,7 @@
 
         [HttpPost]
         [Route("add")]
-        public ActionResult Add(AddGarageModel dto)
+        public ActionResult Add(GarageAddViewModel dto)
         {
             return Do(
                 () => garageAddService.TryAddGarage(dto),

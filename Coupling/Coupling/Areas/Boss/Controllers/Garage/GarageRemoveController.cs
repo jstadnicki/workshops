@@ -3,6 +3,7 @@ namespace Coupling.Areas.Boss.Controllers.GaragesController
     using System.Web.Mvc;
 
     using Coupling.Areas.Boss.Services;
+    using Coupling.Areas.Boss.Services.Garage;
     using Coupling.Controllers;
 
     [RouteArea("boss")]

@@ -1,4 +1,4 @@
-﻿namespace Coupling.Controllers
+﻿namespace Coupling.Areas.Boss.Dtos
 {
     using System.ComponentModel.DataAnnotations;
 

@@ -5,7 +5,8 @@ using Microsoft.Practices.Unity.Configuration;
 namespace Coupling.App_Start
 {
     using Coupling.Areas.Boss.Services;
-    using Coupling.Areas.Boss.Services.Implementation;
+    using Coupling.Areas.Boss.Services.Garage;
+    using Coupling.Areas.Boss.Services.Garage.Implementation;
     using Coupling.Controllers;
     using Coupling.Interfaces;
 

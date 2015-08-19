@@ -2,6 +2,7 @@ namespace Coupling.Controllers
 {
     using System.Linq;
 
+    using Coupling.Areas.Boss.Dtos;
     using Coupling.Common;
     using Coupling.DataModels;
     using Coupling.Interfaces;

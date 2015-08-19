@@ -1,5 +1,6 @@
 namespace Coupling.Controllers
 {
+    using Coupling.Areas.Boss.Dtos;
     using Coupling.DataModels;
 
     public class EditCarViewModel

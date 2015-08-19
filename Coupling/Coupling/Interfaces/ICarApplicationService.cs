@@ -1,5 +1,6 @@
 namespace Coupling.Interfaces
 {
+    using Coupling.Areas.Boss.Dtos;
     using Coupling.Controllers;
 
     public interface ICarApplicationService

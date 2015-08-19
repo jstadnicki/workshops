@@ -1,8 +1,9 @@
-using System.Web.Mvc;
-using Coupling.Controllers;
-
-namespace Coupling.Areas.Boss.Services.Implementation
+namespace Coupling.Areas.Boss.Services.Garage.Implementation
 {
+    using System.Web.Mvc;
+
+    using Coupling.Controllers;
+
     class GarageService : IGarageAddService, 
                           IGarageListService, 
                           IGarageRemoveService
