@@ -1,0 +1,17 @@
+﻿@model Coupling.Controllers.CarsViewModel
+
+@foreach(var car in Model.Cars)
+{
+    <div>
+        <input type="hidden" name="Id" value="@car.Id"/>
+        <h2>@car.Name</h2>
+        <h4>@car.CarType</h4>
+        <div>@car.Color</div>
+        <div>@car.Price</div>
+        @Html.ActionLink("details", "Details", "CarBase", new { id = car.Id }, null)
+    </div>
+}
+
+
+
+@Html.ActionLink("crete new car","Create","CarBase",null,new{@class="btn btn-default"})

@@ -4,7 +4,7 @@ namespace Coupling.Controllers
     using System.Collections.Generic;
     using System.Web.Mvc;
 
-    public abstract class ControllerBase : Controller
+    public abstract class BaseController : Controller
     {
         protected ActionResult Do(
             Func<OperationResult> command,

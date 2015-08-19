@@ -5,11 +5,11 @@ namespace Coupling.Controllers
     using System;
     using Coupling.Interfaces;
 
-    public class CarController : ControllerBase
+    public class CarBaseController : BaseController
     {
         private readonly ICarApplicationService _applicationService;
 
-        public CarController(ICarApplicationService applicationService)
+        public CarBaseController(ICarApplicationService applicationService)
         {
             _applicationService = applicationService;
         }
@@ -69,7 +69,7 @@ namespace Coupling.Controllers
         {
             return this.Do(
                 () => _applicationService.TryDeleteCar(id),
-                x => RedirectToAction("List", "Car"),
+                x => RedirectToAction("List", "CarBase"),
                 x =>
                 {
                     throw new Exception("WHAT TO DO?");

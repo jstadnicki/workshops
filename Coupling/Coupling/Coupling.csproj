@@ -143,27 +143,24 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
-    <Compile Include="Areas\Boss\BossAreaRegistration.cs" />
-    <Compile Include="Areas\Boss\Models\AddGarageModel.cs" />
+    <Compile Include="Areas\Boss\Models\GarageAddModel.cs" />
     <Compile Include="Areas\Boss\Services\Implementation\GarageService.cs" />
     <Compile Include="Areas\Boss\Services\IGarageListService.cs" />
     <Compile Include="Areas\Boss\Services\IGarageRemoveService.cs" />
-    <Compile Include="Areas\Boss\Models\CreateGarageViewModel.cs" />
+    <Compile Include="Areas\Boss\Models\GarageCreateViewModel.cs" />
     <Compile Include="Areas\Boss\Models\GarageListViewModel.cs" />
     <Compile Include="Areas\Boss\Models\GarageRemoveViewModel.cs" />
-    <Compile Include="Areas\Boss\Services\_IGarageService.cs" />
-    <Compile Include="Areas\Boss\Controllers\GarageController\_GarageController.cs" />
-    <Compile Include="Areas\Boss\Controllers\GarageController\List.cs" />
-    <Compile Include="Areas\Boss\Controllers\GarageController\Remove.cs" />
+    <Compile Include="Areas\Boss\Controllers\Garage\GarageListController.cs" />
+    <Compile Include="Areas\Boss\Controllers\Garage\GarageRemoveController.cs" />
     <Compile Include="Areas\Boss\Services\IGarageAddService.cs" />
     <Compile Include="Areas\Client\ClientAreaRegistration.cs" />
-    <Compile Include="Areas\Boss\Controllers\GarageController\Add.cs" />
-    <Compile Include="Controllers\ControllerBase.cs" />
-    <Compile Include="Controllers\GarageOwnerController.cs" />
+    <Compile Include="Areas\Boss\Controllers\Garage\GarageAddController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\GarageOwnerBaseController.cs" />
     <Compile Include="DataModels\Car.cs" />
     <Compile Include="Interfaces\ICarApplicationService.cs" />
     <Compile Include="Services\CarApplicationService.cs" />
-    <Compile Include="Controllers\CarController.cs" />
+    <Compile Include="Controllers\CarBaseController.cs" />
     <Compile Include="ViewModels\CarDetailsViewModel.cs" />
     <Compile Include="Dtos\CarDto.cs" />
     <Compile Include="ViewModels\CarsViewModel.cs" />
@@ -200,6 +197,7 @@
     <Content Include="Areas\Client\Views\web.config" />
     <Content Include="Areas\Boss\Views\Garage\List.cshtml" />
     <Content Include="Areas\Boss\Views\Garage\Remove.cshtml" />
+    <Content Include="Areas\Boss\Views\GarageList\List.cshtml" />
     <None Include="Areas\Boss\Views\Garage\Add.cshtml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Icon.png" />
@@ -220,14 +218,14 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Car\About.cshtml" />
-    <Content Include="Views\Car\Contact.cshtml" />
-    <Content Include="Views\Car\Index.cshtml" />
-    <Content Include="Views\Car\List.cshtml" />
-    <Content Include="Views\Car\Details.cshtml" />
-    <Content Include="Views\Car\Edit.cshtml" />
+    <Content Include="Views\CarBase\About.cshtml" />
+    <Content Include="Views\CarBase\Contact.cshtml" />
+    <Content Include="Views\CarBase\Index.cshtml" />
+    <Content Include="Views\CarBase\List.cshtml" />
+    <Content Include="Views\CarBase\Details.cshtml" />
+    <Content Include="Views\CarBase\Edit.cshtml" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
-    <Content Include="Views\Car\Create.cshtml">
+    <Content Include="Views\CarBase\Create.cshtml">
       <SubType>Code</SubType>
     </Content>
   </ItemGroup>

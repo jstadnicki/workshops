@@ -1,4 +1,4 @@
-namespace Coupling.Areas.Boss.Controllers
+namespace Coupling.Areas.Boss.Models
 {
     public class AddGarageModel
     {

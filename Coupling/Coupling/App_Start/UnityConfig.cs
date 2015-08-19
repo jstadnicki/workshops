@@ -4,6 +4,8 @@ using Microsoft.Practices.Unity.Configuration;
 
 namespace Coupling.App_Start
 {
+    using Coupling.Areas.Boss.Services;
+    using Coupling.Areas.Boss.Services.Implementation;
     using Coupling.Controllers;
     using Coupling.Interfaces;
 
@@ -41,6 +43,9 @@ namespace Coupling.App_Start
             // TODO: Register your types here
             container.RegisterType<IUnit, Unit>(new HierarchicalLifetimeManager());
             container.RegisterType<ICarApplicationService, CarApplicationService>();
+            container.RegisterType<IGarageListService, GarageService>();
+            container.RegisterType<IGarageAddService, GarageService>();
+            container.RegisterType<IGarageRemoveService, GarageService>();
         }
     }
 }

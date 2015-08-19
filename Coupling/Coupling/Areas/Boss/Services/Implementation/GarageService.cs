@@ -1,22 +1,23 @@
 using System.Web.Mvc;
-using Coupling.Areas.Boss.Controllers;
 using Coupling.Controllers;
 
 namespace Coupling.Areas.Boss.Services.Implementation
 {
-    class GarageService : IGarageService
+    class GarageService : IGarageAddService, 
+                          IGarageListService, 
+                          IGarageRemoveService
     {
-        OperationResult IGarageService.TryAddGarage(AddGarageModel dto)
+        OperationResult TryAddGarage(AddGarageModel dto)
         {
             throw new System.NotImplementedException();
         }
 
-        CreateGarageViewModel IGarageService.GetCreateGarageViewModel()
+        CreateGarageViewModel GetCreateGarageViewModel()
         {
             throw new System.NotImplementedException();
         }
 
-        GarageRemoveViewModel IGarageService.GetRemoveGarageViewModel()
+        GarageRemoveViewModel GetRemoveGarageViewModel()
         {
             throw new System.NotImplementedException();
         }
@@ -26,12 +27,12 @@ namespace Coupling.Areas.Boss.Services.Implementation
             throw new System.NotImplementedException();
         }
 
-        CreateGarageViewModel IGarageService.GetCreateGarageViewModel(AddGarageModel dto)
+        CreateGarageViewModel GetCreateGarageViewModel(AddGarageModel dto)
         {
             throw new System.NotImplementedException();
         }
 
-        GarageListViewModel IGarageService.GetListGarageViewModel()
+        GarageListViewModel GetListGarageViewModel()
         {
             throw new System.NotImplementedException();
         }

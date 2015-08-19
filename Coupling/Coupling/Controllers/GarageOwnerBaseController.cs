@@ -2,7 +2,7 @@
 {
     using System.Web.Mvc;
 
-    public class GarageOwnerController : ControllerBase
+    public class GarageOwnerBaseController : BaseController
     {
         [HttpGet]
         public ActionResult Create()
