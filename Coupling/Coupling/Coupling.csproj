@@ -144,6 +144,8 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Boss\Models\Garage\GarageAddViewModel.cs" />
+    <Compile Include="Areas\Boss\Services\Garage\Implementation\AddGarageModel.cs" />
+    <Compile Include="Areas\Boss\Services\Garage\Implementation\CreateGarageViewModel.cs" />
     <Compile Include="Areas\Boss\Services\Garage\Implementation\GarageService.cs" />
     <Compile Include="Areas\Boss\Services\Garage\IGarageListService.cs" />
     <Compile Include="Areas\Boss\Services\Garage\IGarageRemoveService.cs" />
@@ -153,6 +155,8 @@
     <Compile Include="Areas\Boss\Controllers\Garage\GarageListController.cs" />
     <Compile Include="Areas\Boss\Controllers\Garage\GarageRemoveController.cs" />
     <Compile Include="Areas\Boss\Services\Garage\IGarageAddService.cs" />
+    <Compile Include="Areas\Boss\Services\Garage\Implementation\IGarageRepository.cs" />
+    <Compile Include="Areas\Boss\Services\Garage\Implementation\IMapper.cs" />
     <Compile Include="Areas\Client\ClientAreaRegistration.cs" />
     <Compile Include="Areas\Boss\Controllers\Garage\GarageAddController.cs" />
     <Compile Include="Controllers\BaseController.cs" />

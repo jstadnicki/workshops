@@ -24,6 +24,8 @@
 
         }
 
+        public IQueryable<Garage> Garages { get; private set; }
+
         public void Save()
         {
             this.SaveChanges();

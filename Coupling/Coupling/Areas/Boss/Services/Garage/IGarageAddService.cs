@@ -1,3 +1,5 @@
+using Coupling.Areas.Boss.Services.Garage.Implementation;
+
 namespace Coupling.Areas.Boss.Services.Garage
 {
     using System.Web.Mvc;
@@ -12,5 +14,7 @@ namespace Coupling.Areas.Boss.Services.Garage
         ActionResult GetCreateGarageViewModel(GarageAddViewModel viewModel);
 
         OperationResult TryAddGarage(GarageAddViewModel viewModel);
+        ActionResult GetCreateGarageViewModel(AddGarageModel model);
+        OperationResult TryAddGarage(AddGarageModel model);
     }
 }

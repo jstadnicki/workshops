@@ -1,9 +1,9 @@
 namespace Coupling.Areas.Boss.Services.Garage
 {
-    using Coupling.Areas.Boss.Models.Garage;
+    using Models.Garage;
 
     public interface IGarageListService
     {
-        GarageListViewModel GetListGarageViewModel();
+        GarageListViewModel GetGarageListViewModel();
     }
 }

@@ -7,6 +7,7 @@
     public interface IUnit
     {
         IQueryable<Car> Cars { get; }
+        IQueryable<Garage> Garages { get; }
         void Save();
         void Remove(int id);
 
