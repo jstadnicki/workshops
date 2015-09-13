@@ -1,0 +1,15 @@
+﻿@using Coupling.Modern.ViewModels
+@model Coupling.Modern.ViewModels.CarDetailsViewModel
+<div>
+    <h1>@Model.Name</h1>
+    <div>@Model.Price</div>
+    <div>@Model.CarType</div>
+    <div>@Model.Color</div>
+
+    <a asp-controller="CarBase" asp-action="Edit" class="btn btn-default" asp-route-carId="@Model.Id">edit</a>
+    <form method="POST" asp-controller="CarBase" asp-action="Delete">
+        <input asp-for="Id" type="hidden"/>
+        <input type="submit" value="delete" class="btn btn-danger"/>
+
+    </form>
+</div>

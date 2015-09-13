@@ -1,0 +1,20 @@
+﻿@using Coupling.Modern.ViewModels
+@model Coupling.Modern.ViewModels.CarsViewModel
+
+<div class="row">
+    @foreach (var car in Model.Cars)
+    {
+        <div class="col-md-4">
+            <input type="hidden" name="Id" value="@car.Id" />
+            <h2>@car.Name</h2>
+            <h4>@car.CarType</h4>
+            <div>@car.Color</div>
+            <div>@car.Price</div>
+            <a asp-controller="CarBase" asp-action="Details" asp-route-id="@car.Id">details</a>
+            @*@Html.ActionLink("details", "Details", "CarBase", new { id = car.Id }, null)*@
+        </div>
+    }
+
+    <a asp-action="Create" asp-controller="CarBase" class="btn btn-default">create new car</a>
+
+</div>

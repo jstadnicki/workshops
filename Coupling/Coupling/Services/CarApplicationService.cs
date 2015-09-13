@@ -2,23 +2,23 @@ namespace Coupling.Controllers
 {
     using System.Linq;
 
-    using Coupling.Areas.Boss.Dtos;
-    using Coupling.Common;
-    using Coupling.DataModels;
-    using Coupling.Interfaces;
+    using Areas.Boss.Dtos;
+    using Common;
+    using DataModels;
+    using Interfaces;
 
     public class CarApplicationService : ICarApplicationService
     {
-        private readonly IUnit _carRepository;
+        private readonly IUnit carRepository;
 
         public CarApplicationService(IUnit carRepository)
         {
-            this._carRepository = carRepository;
+            this.carRepository = carRepository;
         }
 
         public CarsViewModel GetCarsViewModel()
         {
-            var carsFromUnit = this._carRepository.Cars.ToList();
+            var carsFromUnit = carRepository.Cars.ToList();
 
             var viewModel = new CarsViewModel();
 
@@ -42,14 +42,14 @@ namespace Coupling.Controllers
         {
             var c = new Car
                         {
-                            CarType = (CarType)dto.SelectedCarType,
+                            CarType = dto.SelectedCarType,
                             Color = dto.Color,
                             Name = dto.Name,
                             Price = dto.Price
                         };
 
-            this._carRepository.Add(c);
-            this._carRepository.Save();
+            carRepository.Add(c);
+            carRepository.Save();
         }
 
         public bool CanSave(CarDto viewmodel)
@@ -69,16 +69,16 @@ namespace Coupling.Controllers
 
         public OperationResult TrySaveNewCar(CarDto dto)
         {
-            if (this.CanSave(dto))
+            if (CanSave(dto))
             {
-                this.SaveNewCar(dto);
+                SaveNewCar(dto);
             }
             return OperationResult.Ok();
         }
 
         public EditCarViewModel GetEditCarViewModel(int carId)
         {
-            var carToEdit = this._carRepository.Cars.Single(r => r.Id == carId);
+            var carToEdit = carRepository.Cars.Single(r => r.Id == carId);
             var viewmodel = new EditCarViewModel(carToEdit);
             return viewmodel;
         }
@@ -90,16 +90,16 @@ namespace Coupling.Controllers
 
         public OperationResult TryEditCar(EditCarDto cardto)
         {
-            if (this.CanSave(cardto))
+            if (CanSave(cardto))
             {
-                var dbCar = this._carRepository.Cars.First(x => x.Id == cardto.Id);
+                var dbCar = carRepository.Cars.First(x => x.Id == cardto.Id);
                 dbCar.CarType = cardto.CarType;
                 dbCar.Id = cardto.Id;
                 dbCar.Color = cardto.Color;
                 dbCar.Price = cardto.Price;
                 dbCar.Name = cardto.Name;
 
-                this._carRepository.Save();
+                carRepository.Save();
 
                 return OperationResult.Ok();
             }
@@ -109,19 +109,19 @@ namespace Coupling.Controllers
 
         public OperationResult TryDeleteCar(int id)
         {
-            this._carRepository.Remove(id);
-            this._carRepository.Save();
+            carRepository.Remove(id);
+            carRepository.Save();
             return OperationResult.Ok();
         }
 
-        private bool CanSave(EditCarDto dto)
+        private static bool CanSave(EditCarDto dto)
         {
             return true;
         }
 
         public CarDetailsViewModel GetCarDetailsViewModel(int id)
         {
-            var car = this._carRepository.Cars.Single(fcar => fcar.Id == id);
+            var car = carRepository.Cars.Single(fcar => fcar.Id == id);
             var carDetailsViewModel = new CarDetailsViewModel(
                 car.Name,
                 car.Price.ToString("C"),

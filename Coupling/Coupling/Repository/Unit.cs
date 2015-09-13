@@ -15,14 +15,7 @@
 
         public DbSet<Car> CarsSet { get; set; }
 
-        public IQueryable<Car> Cars
-        {
-            get
-            {
-                return CarsSet;
-            }
-
-        }
+        public IQueryable<Car> Cars => CarsSet;
 
         public IQueryable<Garage> Garages { get; private set; }
 

@@ -1,0 +1,10 @@
+{
+  "AppSettings": {
+    "SiteTitle": "Coupling.Modern"
+  },
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=aspnet5-Coupling.Modern-82cb87d4-0550-4eab-bd7f-c99a93a0f644;Trusted_Connection=True;MultipleActiveResultSets=true"
+    }
+  }
+}

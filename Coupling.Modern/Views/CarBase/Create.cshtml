@@ -1,0 +1,30 @@
+﻿@using Coupling.Modern.ViewModels
+@model Coupling.Modern.ViewModels.CreateCarViewModel
+
+<form asp-controller="CarBase" asp-action="Create" method="POST">
+    @Html.ValidationSummary()
+    <div>
+        @Html.ValidationMessageFor(m => m.CarDto.Color)
+        <label asp-for="CarDto.Color"></label>
+        <input asp-for="CarDto.Color"/>
+        <span asp-validation-for="CarDto.Color"></span>
+    </div>
+    <div>
+        <label asp-for="CarDto.Name"></label>
+        <input asp-for="CarDto.Name" />
+        <span asp-validation-for="CarDto.Name"></span>
+    </div>
+    <div>
+        <label asp-for="CarDto.Price"></label>
+        <input asp-for="CarDto.Price" />
+        <span asp-validation-for="CarDto.Price"></span>
+    </div>
+
+    <div>
+        <label asp-for="CarDto.SelectedCarType"></label>
+        <select asp-for="CarDto.SelectedCarType"></select>
+        <span asp-validation-for="CarDto.SelectedCarType"></span>
+    </div>
+
+    <input type="submit" value="add car" class="btn btn-primary" />
+</form>
