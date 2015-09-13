@@ -7,11 +7,10 @@ namespace Coupling.Modern.Controllers
 {
     public interface IUnit
     {
-        DbSet<Car> Cars { get; }
+        IQueryable<Car> Cars { get; }
         IQueryable<Garage> Garages { get; }
         Task<int> Save();
         Task Remove(int id);
-
         void Add(Car car);
     }
 }

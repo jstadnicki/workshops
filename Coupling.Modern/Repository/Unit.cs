@@ -12,18 +12,13 @@ namespace Coupling.Modern.Repository
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Make Blog.Url required
             modelBuilder.Entity<Car>();
-            //modelBuilder.Entity<Garage>();
         }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder options)
-        //{
-        //}
-        public DbSet<Car> Cars { get; set; }
+        public DbSet<Car> CarsSet { get; set; }
 
         //public DbSet<Garage> Garages { get; set; }
-        //public IQueryable<Car> Cars => CarsSet;
+        public IQueryable<Car> Cars => CarsSet;
 
         public IQueryable<Garage> Garages { get; private set; }
 
@@ -35,12 +30,12 @@ namespace Coupling.Modern.Repository
         public async Task Remove(int id)
         {
             var i = await Cars.FirstAsync(m => m.Id == id);
-            Cars.Remove(i);
+            CarsSet.Remove(i);
         }
 
         public void Add(Car car)
         {
-            Cars.Add(car);
+            CarsSet.Add(car);
         }
     }
 }

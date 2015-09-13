@@ -29,7 +29,6 @@ namespace Coupling.Modern
         public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
         {
             // Setup configuration sources.
-
             var builder = new ConfigurationBuilder(appEnv.ApplicationBasePath)
                 .AddJsonFile("config.json")
                 .AddJsonFile($"config.{env.EnvironmentName}.json", optional: true);
@@ -69,14 +68,11 @@ namespace Coupling.Modern
             // services.AddWebApiConventions();
 
             // Register application services.
-            services.AddTransient<IUnit, Unit>();
+            services.AddScoped<IUnit, Unit>();
             services.AddTransient<ICarApplicationService, CarApplicationService>();
             services.AddTransient<IGarageListService, GarageService>();
             services.AddTransient<IGarageAddService, GarageService>();
             services.AddTransient<IGarageRemoveService, GarageService>();
-            //services.AddTransient<IEmailSender, AuthMessageSender>();
-            //services.AddTransient<ISmsSender, AuthMessageSender>();            //services.AddTransient<IEmailSender, AuthMessageSender>();
-            //services.AddTransient<ISmsSender, AuthMessageSender>();
         }
 
         // Configure is called after ConfigureServices is called.
@@ -106,13 +102,6 @@ namespace Coupling.Modern
 
             // Add cookie-based authentication to the request pipeline.
             app.UseIdentity();
-
-            // Add authentication middleware to the request pipeline. You can configure options such as Id and Secret in the ConfigureServices method.
-            // For more information see http://go.microsoft.com/fwlink/?LinkID=532715
-            // app.UseFacebookAuthentication();
-            // app.UseGoogleAuthentication();
-            // app.UseMicrosoftAccountAuthentication();
-            // app.UseTwitterAuthentication();
 
             // Add MVC to the request pipeline.
             app.UseMvc(routes =>
