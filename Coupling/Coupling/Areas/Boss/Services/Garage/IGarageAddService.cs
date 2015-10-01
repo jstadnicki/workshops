@@ -1,20 +1,14 @@
+using Coupling.Areas.Boss.Models.Garage;
 using Coupling.Areas.Boss.Services.Garage.Implementation;
+using Coupling.Controllers;
 
 namespace Coupling.Areas.Boss.Services.Garage
 {
-    using System.Web.Mvc;
-
-    using Coupling.Areas.Boss.Models.Garage;
-    using Coupling.Controllers;
-
     public interface IGarageAddService
     {
-        ActionResult GetCreateGarageViewModel();
+        CreateGarageViewModel GetCreateGarageViewModel();
+        CreateGarageViewModel GetCreateGarageViewModel(GarageAddViewModel dto);
 
-        ActionResult GetCreateGarageViewModel(GarageAddViewModel viewModel);
-
-        OperationResult TryAddGarage(GarageAddViewModel viewModel);
-        ActionResult GetCreateGarageViewModel(AddGarageModel model);
-        OperationResult TryAddGarage(AddGarageModel model);
+        OperationResult TryAddGarage(GarageAddViewModel dto);
     }
 }

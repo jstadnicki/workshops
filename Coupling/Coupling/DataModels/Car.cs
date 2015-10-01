@@ -16,6 +16,7 @@ namespace Coupling.DataModels
 
     public class Garage
     {
+        public string Name { get; set; }
         public List<Vehicle> Vehicles { get; set; }
     }
 

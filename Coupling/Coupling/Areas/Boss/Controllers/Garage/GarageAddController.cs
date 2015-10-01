@@ -24,7 +24,7 @@
         public ActionResult Add()
         {
             var viewModel = garageAddService.GetCreateGarageViewModel();
-            return View(viewModel);
+            return this.View(viewModel);
         }
 
         [HttpPost]
@@ -37,7 +37,7 @@
                 failure =>
                     {
                         var viewModel = garageAddService.GetCreateGarageViewModel(dto);
-                        return View(viewModel);
+                        return this.View(viewModel);
                     });
         }
     }

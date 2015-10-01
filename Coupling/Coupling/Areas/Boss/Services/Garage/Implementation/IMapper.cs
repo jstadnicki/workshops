@@ -3,8 +3,14 @@ using Coupling.Areas.Boss.Models.Garage;
 
 namespace Coupling.Areas.Boss.Services.Garage.Implementation
 {
-    internal interface IMapper
+    using Coupling.DataModels;
+
+    internal class ServiceMapper : IGarageServiceMapper
     {
-        GarageListViewModel GetGarageListViewModel(IEnumerable<DataModels.Garage> garages);
+        public GarageListViewModel Map(List<Garage> garages)
+        {
+            var garageListViewModel = AutoMapper.Mapper.Map<GarageListViewModel>(garages);
+            return garageListViewModel;
+        }
     }
 }

@@ -45,6 +45,10 @@
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="AutoMapper, Version=4.0.4.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.4.0.4\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -155,6 +159,7 @@
     <Compile Include="Areas\Boss\Controllers\Garage\GarageListController.cs" />
     <Compile Include="Areas\Boss\Controllers\Garage\GarageRemoveController.cs" />
     <Compile Include="Areas\Boss\Services\Garage\IGarageAddService.cs" />
+    <Compile Include="Areas\Boss\Services\Garage\Implementation\IGarageMapper.cs" />
     <Compile Include="Areas\Boss\Services\Garage\Implementation\IGarageRepository.cs" />
     <Compile Include="Areas\Boss\Services\Garage\Implementation\IMapper.cs" />
     <Compile Include="Areas\Client\ClientAreaRegistration.cs" />
@@ -202,6 +207,7 @@
     <Content Include="Areas\Boss\Views\Garage\List.cshtml" />
     <Content Include="Areas\Boss\Views\Garage\Remove.cshtml" />
     <Content Include="Areas\Boss\Views\GarageList\List.cshtml" />
+    <None Include="Areas\Boss\Views\GarageAdd\Add.cshtml" />
     <None Include="Areas\Boss\Views\Garage\Add.cshtml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Icon.png" />
