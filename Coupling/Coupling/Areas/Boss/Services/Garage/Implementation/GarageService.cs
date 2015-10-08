@@ -5,6 +5,8 @@ using Coupling.Controllers;
 
 namespace Coupling.Areas.Boss.Services.Garage.Implementation
 {
+    using System;
+
     class GarageService : IGarageAddService, 
                           IGarageListService, 
                           IGarageRemoveService
@@ -22,7 +24,7 @@ namespace Coupling.Areas.Boss.Services.Garage.Implementation
         public GarageListViewModel GetGarageListViewModel()
         {
             var garages = this.garageRepository.GetGarageList();
-            var garageListViewModel = this.garageServiceMapper.Map(garages);
+            var garageListViewModel = this.garageServiceMapper.MapToGarageListViewModel(garages);
             return garageListViewModel;
         }
 
@@ -31,14 +33,29 @@ namespace Coupling.Areas.Boss.Services.Garage.Implementation
             return new CreateGarageViewModel();
         }
 
-        public CreateGarageViewModel GetCreateGarageViewModel(GarageAddViewModel viewModel)
+        public CreateGarageViewModel GetCreateGarageViewModel(GarageAddModel model)
         {
             throw new System.NotImplementedException();
         }
 
-        public OperationResult TryAddGarage(GarageAddViewModel viewModel)
+        public OperationResult TryAddGarage(GarageAddModel model)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                this.AddGarage(model);
+            }
+            catch
+            {
+                return OperationResult.Fail(ApplicationErrors.TryAddGarageFailed);
+            }
+
+            return OperationResult.Ok();
+        }
+
+        private void AddGarage(GarageAddModel model)
+        {
+            var garage = this.garageServiceMapper.MapToGarage(model);
+            this.garageRepository.AddGarage(garage);
         }
 
         public ActionResult GetCreateGarageViewModel(AddGarageModel model)
@@ -55,5 +72,16 @@ namespace Coupling.Areas.Boss.Services.Garage.Implementation
         {
             throw new System.NotImplementedException();
         }
+    }
+
+    public enum ApplicationErrors
+    {
+        TryAddGarageFailed,
+
+        ModelStateIsInvalid,
+
+        None,
+
+        TryEditCarFailed
     }
 }

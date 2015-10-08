@@ -16,7 +16,7 @@ namespace Coupling.Areas.Boss.Controllers.GaragesController
         }
 
         [HttpGet]
-        [Route("list")]
+        [Route("list",Name = "garage/list")]
         public ActionResult List()
         {
             var viewModel = this.garageListService.GetGarageListViewModel();

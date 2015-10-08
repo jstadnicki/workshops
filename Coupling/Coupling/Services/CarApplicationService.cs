@@ -3,6 +3,7 @@ namespace Coupling.Controllers
     using System.Linq;
 
     using Coupling.Areas.Boss.Dtos;
+    using Coupling.Areas.Boss.Services.Garage.Implementation;
     using Coupling.Common;
     using Coupling.DataModels;
     using Coupling.Interfaces;
@@ -90,21 +91,21 @@ namespace Coupling.Controllers
 
         public OperationResult TryEditCar(EditCarDto cardto)
         {
-            if (this.CanSave(cardto))
+            if (!this.CanSave(cardto))
             {
-                var dbCar = this._carRepository.Cars.First(x => x.Id == cardto.Id);
-                dbCar.CarType = cardto.CarType;
-                dbCar.Id = cardto.Id;
-                dbCar.Color = cardto.Color;
-                dbCar.Price = cardto.Price;
-                dbCar.Name = cardto.Name;
-
-                this._carRepository.Save();
-
-                return OperationResult.Ok();
+                return OperationResult.Fail(ApplicationErrors.TryEditCarFailed);
             }
 
-            return OperationResult.Fail();
+            var dbCar = this._carRepository.Cars.First(x => x.Id == cardto.Id);
+            dbCar.CarType = cardto.CarType;
+            dbCar.Id = cardto.Id;
+            dbCar.Color = cardto.Color;
+            dbCar.Price = cardto.Price;
+            dbCar.Name = cardto.Name;
+
+            this._carRepository.Save();
+
+            return OperationResult.Ok();
         }
 
         public OperationResult TryDeleteCar(int id)

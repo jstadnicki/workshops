@@ -7,6 +7,7 @@ namespace Coupling.Areas.Boss.Services.Garage.Implementation
 
     internal interface IGarageServiceMapper
     {
-        GarageListViewModel Map(List<Garage> garages);
+        GarageListViewModel MapToGarageListViewModel(List<Garage> garages);
+        Garage MapToGarage(GarageAddModel garages);
     }
 }

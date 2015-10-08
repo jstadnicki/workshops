@@ -7,21 +7,27 @@ namespace Coupling.Areas.Boss.Services.Garage.Implementation
     internal interface IGarageRepository
     {
         List<DataModels.Garage> GetGarageList();
+
+        void AddGarage(Garage garage);
     }
 
     class GarageRepository : IGarageRepository
     {
+        private static readonly List<Garage> Garages;
+
+        static GarageRepository()
+        {
+            Garages = new List<Garage>();
+        }
+
         public List<Garage> GetGarageList()
         {
-            var garages = new List<Garage>
-                              {
-                                  new Garage
-                                      {
-                                          Name = "Gara¿ na œwiebodzkim",
-                                          Vehicles = new List<Vehicle>()
-                                      }
-                              };
-            return garages;
+            return Garages;
+        }
+
+        public void AddGarage(Garage garage)
+        {
+            Garages.Add(garage);
         }
     }
 }

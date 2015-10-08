@@ -20,7 +20,7 @@
         }
 
         [HttpGet]
-        [Route("add",Name = "garage/add")]
+        [Route("add", Name = "garage/add")]
         public ActionResult Add()
         {
             var viewModel = garageAddService.GetCreateGarageViewModel();
@@ -29,16 +29,16 @@
 
         [HttpPost]
         [Route("add")]
-        public ActionResult Add(GarageAddViewModel dto)
+        public ActionResult Add(GarageAddModel dto)
         {
             return Do(
                 () => garageAddService.TryAddGarage(dto),
-                success => RedirectToRoute("garage/remove"),
+                success => RedirectToRoute("garage/list"),
                 failure =>
-                    {
-                        var viewModel = garageAddService.GetCreateGarageViewModel(dto);
-                        return this.View(viewModel);
-                    });
+                {
+                    var viewModel = garageAddService.GetCreateGarageViewModel(dto);
+                    return this.View(viewModel);
+                });
         }
     }
 }

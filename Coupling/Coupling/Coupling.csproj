@@ -142,12 +142,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AutoMapper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
-    <Compile Include="Areas\Boss\Models\Garage\GarageAddViewModel.cs" />
+    <Compile Include="Areas\Boss\Models\Garage\GarageAddModel.cs" />
     <Compile Include="Areas\Boss\Services\Garage\Implementation\AddGarageModel.cs" />
     <Compile Include="Areas\Boss\Services\Garage\Implementation\CreateGarageViewModel.cs" />
     <Compile Include="Areas\Boss\Services\Garage\Implementation\GarageService.cs" />
@@ -241,6 +242,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Boss\Views\NewFolder1\" />
     <Folder Include="Areas\Boss\Views\Shared\" />
     <Folder Include="Areas\Client\Controllers\" />
     <Folder Include="Areas\Client\Models\" />

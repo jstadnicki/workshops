@@ -47,6 +47,8 @@ namespace Coupling.App_Start
             container.RegisterType<IGarageListService, GarageService>();
             container.RegisterType<IGarageAddService, GarageService>();
             container.RegisterType<IGarageRemoveService, GarageService>();
+            container.RegisterType<IGarageRepository, GarageRepository>();
+            container.RegisterType<IGarageServiceMapper, ServiceMapper>();
         }
     }
 }

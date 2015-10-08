@@ -2,7 +2,11 @@
 
 @{
     ViewBag.Title = "title";
-    Layout = "_Layout";
 }
 
 <h2>title</h2>
+
+@foreach (var g in Model.Garages)
+{
+    <div>@g.Name</div>
+}

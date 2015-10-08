@@ -4,6 +4,8 @@ namespace Coupling.Controllers
     using System.Collections.Generic;
     using System.Web.Mvc;
 
+    using Coupling.Areas.Boss.Services.Garage.Implementation;
+
     public abstract class BaseController : Controller
     {
         protected ActionResult Do(
@@ -11,9 +13,9 @@ namespace Coupling.Controllers
             Func<OperationResult, ActionResult> onSuccess,
             Func<OperationResult, ActionResult> onFail)
         {
-            if (false == this.ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return onFail(OperationResult.Fail());
+                return onFail(OperationResult.Fail(ApplicationErrors.ModelStateIsInvalid));
             }
 
             var result = command();
