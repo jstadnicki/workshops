@@ -8,5 +8,6 @@
 
 @foreach (var g in Model.Garages)
 {
-    <div>@g.Name</div>
+    <div>@*@Html.ActionLink(g.Name, "Edit", "GarageEdit", new {area="boss", id = g.Id },null)*@</div>
+    <div>@Html.RouteLink(g.Name, "garage/edit", new { id = g.Id })</div>
 }

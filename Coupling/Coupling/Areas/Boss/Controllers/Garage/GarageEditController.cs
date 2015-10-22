@@ -1,3 +1,5 @@
+using System;
+
 namespace Coupling.Areas.Boss.Controllers.GaragesController
 {
     using System.Web.Mvc;
@@ -19,7 +21,7 @@ namespace Coupling.Areas.Boss.Controllers.GaragesController
         [Route("edit",Name = "garage/edit")]
         public ActionResult Edit(int garageId)
         {
-            var viewModel = this.garageEditService.GetGarageEditViewModel();
+            var viewModel = this.garageEditService.GetGarageEditViewModel(garageId);
             return this.View(viewModel);
         }
     }

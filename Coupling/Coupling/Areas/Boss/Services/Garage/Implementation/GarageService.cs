@@ -63,9 +63,8 @@ namespace Coupling.Areas.Boss.Services.Garage.Implementation
             throw new System.NotImplementedException();
         }
 
-        public GarageEditViewModel GetGarageEditViewModel()
+        public GarageEditViewModel GetGarageEditViewModel(int garageId)
         {
-            throw new NotImplementedException();
         }
     }
 
