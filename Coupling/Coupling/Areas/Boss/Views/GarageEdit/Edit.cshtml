@@ -1,0 +1,10 @@
+﻿@model Coupling.Areas.Boss.Services.Garage.Implementation.GarageEditViewModel
+           
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m=>m.Id)
+    @Html.LabelFor(m=>m.Name)
+    @Html.EditorFor(m=>m.Name)
+    
+    <input type="submit"/>
+}

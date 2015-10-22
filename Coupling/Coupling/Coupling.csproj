@@ -22,6 +22,8 @@
     <IISExpressUseClassicPipelineMode />
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
     <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -148,9 +150,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Areas\Boss\Controllers\Garage\GarageEditController.cs" />
+    <Compile Include="Areas\Boss\Controllers\Garage\IGarageEditService.cs" />
+    <Compile Include="Areas\Boss\Models\GarageEditViewModel.cs" />
     <Compile Include="Areas\Boss\Models\Garage\GarageAddModel.cs" />
     <Compile Include="Areas\Boss\Services\Garage\Implementation\AddGarageModel.cs" />
-    <Compile Include="Areas\Boss\Services\Garage\Implementation\CreateGarageViewModel.cs" />
+    <Compile Include="Areas\Boss\Services\Garage\Implementation\GarageAddViewModel.cs" />
     <Compile Include="Areas\Boss\Services\Garage\Implementation\GarageService.cs" />
     <Compile Include="Areas\Boss\Services\Garage\IGarageListService.cs" />
     <Compile Include="Areas\Boss\Services\Garage\IGarageRemoveService.cs" />
@@ -194,6 +199,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="FodyWeavers.xml" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -208,6 +214,7 @@
     <Content Include="Areas\Boss\Views\Garage\List.cshtml" />
     <Content Include="Areas\Boss\Views\Garage\Remove.cshtml" />
     <Content Include="Areas\Boss\Views\GarageList\List.cshtml" />
+    <Content Include="Areas\Boss\Views\GarageEdit\Edit.cshtml" />
     <None Include="Areas\Boss\Views\GarageAdd\Add.cshtml" />
     <None Include="Areas\Boss\Views\Garage\Add.cshtml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />

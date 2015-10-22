@@ -6,8 +6,8 @@ namespace Coupling.Areas.Boss.Services.Garage
 {
     public interface IGarageAddService
     {
-        CreateGarageViewModel GetCreateGarageViewModel();
-        CreateGarageViewModel GetCreateGarageViewModel(GarageAddModel dto);
+        GarageAddViewModel GetCreateGarageViewModel();
+        GarageAddViewModel GetCreateGarageViewModel(GarageAddModel dto);
 
         OperationResult TryAddGarage(GarageAddModel dto);
     }

@@ -1,4 +1,5 @@
 using System;
+using Coupling.Areas.Boss.Controllers.GaragesController;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 
@@ -45,6 +46,7 @@ namespace Coupling.App_Start
             container.RegisterType<IUnit, Unit>(new HierarchicalLifetimeManager());
             container.RegisterType<ICarApplicationService, CarApplicationService>();
             container.RegisterType<IGarageListService, GarageService>();
+            container.RegisterType<IGarageEditService, GarageService>();
             container.RegisterType<IGarageAddService, GarageService>();
             container.RegisterType<IGarageRemoveService, GarageService>();
             container.RegisterType<IGarageRepository, GarageRepository>();

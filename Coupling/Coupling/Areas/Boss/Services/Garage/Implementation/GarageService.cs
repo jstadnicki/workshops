@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Web.Mvc;
+using Coupling.Areas.Boss.Controllers.GaragesController;
 using Coupling.Areas.Boss.Models.Garage;
 using Coupling.Controllers;
 
@@ -7,14 +8,15 @@ namespace Coupling.Areas.Boss.Services.Garage.Implementation
 {
     using System;
 
-    class GarageService : IGarageAddService, 
-                          IGarageListService, 
-                          IGarageRemoveService
+    class GarageService : IGarageAddService,
+                          IGarageListService,
+                          IGarageRemoveService,
+                          IGarageEditService
     {
         private readonly IGarageRepository garageRepository;
         private readonly IGarageServiceMapper garageServiceMapper;
 
-        public GarageService(IGarageRepository garageRepository, 
+        public GarageService(IGarageRepository garageRepository,
                              IGarageServiceMapper garageServiceMapper)
         {
             this.garageRepository = garageRepository;
@@ -28,34 +30,22 @@ namespace Coupling.Areas.Boss.Services.Garage.Implementation
             return garageListViewModel;
         }
 
-        public CreateGarageViewModel GetCreateGarageViewModel()
+        public GarageAddViewModel GetCreateGarageViewModel()
         {
-            return new CreateGarageViewModel();
+            return new GarageAddViewModel();
         }
 
-        public CreateGarageViewModel GetCreateGarageViewModel(GarageAddModel model)
+        public GarageAddViewModel GetCreateGarageViewModel(GarageAddModel model)
         {
             throw new System.NotImplementedException();
         }
 
+        //[HandleException(OnFail= ApplicationErrors.TryAddGarageFailed, typeof(Exception), typeof(InvalidCastException))]
         public OperationResult TryAddGarage(GarageAddModel model)
-        {
-            try
-            {
-                this.AddGarage(model);
-            }
-            catch
-            {
-                return OperationResult.Fail(ApplicationErrors.TryAddGarageFailed);
-            }
-
-            return OperationResult.Ok();
-        }
-
-        private void AddGarage(GarageAddModel model)
         {
             var garage = this.garageServiceMapper.MapToGarage(model);
             this.garageRepository.AddGarage(garage);
+            return OperationResult.Ok();
         }
 
         public ActionResult GetCreateGarageViewModel(AddGarageModel model)
@@ -71,6 +61,19 @@ namespace Coupling.Areas.Boss.Services.Garage.Implementation
         public GarageRemoveViewModel GetRemoveGarageViewModel()
         {
             throw new System.NotImplementedException();
+        }
+
+        public GarageEditViewModel GetGarageEditViewModel()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    internal class HandleExceptionAttribute : Attribute
+    {
+        public HandleExceptionAttribute(object a, params object[] b)
+        {
+            
         }
     }
 
